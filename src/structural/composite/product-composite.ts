@@ -1,14 +1,14 @@
-// Component
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+//Component
 export abstract class ProductComponent {
   abstract getPrice(): number;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   add(product: ProductComponent): void {}
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   remove(product: ProductComponent): void {}
 }
 
-// Leaf
+//Leaf
 export class ProductLeaf extends ProductComponent {
   constructor(public name: string, public price: number) {
     super();
@@ -19,7 +19,7 @@ export class ProductLeaf extends ProductComponent {
   }
 }
 
-// Composite
+//Composite
 export class ProductComposite extends ProductComponent {
   private children: ProductComponent[] = [];
 
@@ -37,14 +37,17 @@ export class ProductComposite extends ProductComponent {
   }
 }
 
-// Client
+// Client Code
 const pen = new ProductLeaf('Caneta', 1);
 const smartphone = new ProductLeaf('Smartphone', 1_000);
 const tShirt = new ProductLeaf('Camiseta', 40);
+
 const productBox = new ProductComposite();
 productBox.add(pen, smartphone, tShirt);
+console.log(productBox);
+console.log(productBox.getPrice());
 
-const tablet = new ProductLeaf('Tablet', 2_000);
+const tablet = new ProductLeaf('Tablet', 2000);
 const kindle = new ProductLeaf('Kindle', 300);
 const anotherProductBox = new ProductComposite();
 anotherProductBox.add(tablet, kindle);

@@ -1,9 +1,9 @@
-// Component
+//Component
 export abstract class ValidationComponent {
   abstract validate(value: unknown): boolean;
 }
 
-// Leaf
+//Leaf
 export class ValidateEmail extends ValidationComponent {
   validate(value: unknown): boolean {
     if (typeof value !== 'string') return false;
@@ -16,7 +16,6 @@ export class ValidateString extends ValidationComponent {
     return typeof value === 'string';
   }
 }
-
 export class ValidateNumber extends ValidationComponent {
   validate(value: unknown): boolean {
     if (typeof value !== 'string') return false;
@@ -24,7 +23,7 @@ export class ValidateNumber extends ValidationComponent {
   }
 }
 
-// Composite
+//Composite
 export class ValidationComposite extends ValidationComponent {
   private readonly children: ValidationComponent[] = [];
 
@@ -41,9 +40,10 @@ export class ValidationComposite extends ValidationComponent {
   }
 }
 
+// Client code
 const validateEmail = new ValidateEmail();
-const validateNumber = new ValidateNumber();
 const validateString = new ValidateString();
+const validateNumber = new ValidateNumber();
 const validationComposite = new ValidationComposite();
-validationComposite.add(validateString, validateEmail, validateNumber);
-console.log(validationComposite.validate('luiz123@email.com'));
+validationComposite.add(validateEmail, validateString, validateNumber);
+console.log(validationComposite.validate('luciano2@email.com'));
